@@ -1,0 +1,71 @@
+body {
+    font-family: 'Georgia', serif;
+    background-color: #D8D2E1;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    color: #34435E;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+form, .resultado-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34435E;
+}
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.boton {
+    background-color: #6369D1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+.boton:hover {
+    background-color: #4A50B5;
+}
+.boton-volver {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+    background-color: #6369D1;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+.boton-volver:hover {
+    background-color: #4A50B5;
+}
+.resultado-box {
+    text-align: center;
+}
+.resultado-box h2 {
+    color: #34435E;
+    font-size: 2rem;
+}

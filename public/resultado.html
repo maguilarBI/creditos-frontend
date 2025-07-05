@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Evaluación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Resultado de tu Evaluación 🏦</h1>
+    <div id="resultado-container" class="resultado-box">
+        <!-- Datos dinámicos se insertarán aquí -->
+    </div>
+    <a href="index.html" class="boton-volver">Nueva Evaluación</a>
+
+    <script>
+        // Obtener parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const aprobado = urlParams.get('aprobado') === 'true';
+        const score = urlParams.get('score');
+
+        // Mostrar resultado
+        const container = document.getElementById('resultado-container');
+        container.innerHTML = `
+            <h2>${aprobado ? '✅ ¡Aprobado!' : '❌ No Aprobado'}</h2>
+            <p>Score de crédito: ${score}/100</p>
+            ${aprobado ? 
+                '<p>¡Felicidades! Cumples con los requisitos.</p>' : 
+                '<p>Lo sentimos, no cumples con los requisitos actualmente.</p>'}
+        `;
+    </script>
+</body>
+</html>

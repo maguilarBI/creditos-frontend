@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Crediticia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Evaluación Crediticia 💳</h1>
+    <form id="formEvaluacion">
+        <!-- Datos Personales -->
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" required>
+
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <!-- Datos Financieros -->
+        <label for="ingresos">Ingresos Mensuales ($):</label>
+        <input type="number" id="ingresos" name="ingresos_mensuales" required>
+
+        <label for="deuda">Deuda Actual ($):</label>
+        <input type="number" id="deuda" name="deuda_actual">
+
+        <label for="historial">Historial Crediticio:</label>
+        <select id="historial" name="historial_crediticio" required>
+            <option value="">Seleccione...</option>
+            <option value="bueno">Bueno</option>
+            <option value="regular">Regular</option>
+            <option value="malo">Malo</option>
+        </select>
+
+        <button type="submit" class="boton">Evaluar Crédito</button>
+    </form>
+
+    <script src="js/formulario.js"></script>
+</body>
+</html>
