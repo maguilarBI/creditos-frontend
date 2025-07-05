@@ -1,14 +1,16 @@
-// /var/www/html/creditos/js/formulario.js
+// /var/www/html/creditos/public/js/formulario.js
+console.log("Cargando formulario.js versión 2"); // Verifica que se cargue
 
 document.getElementById('formEvaluacion').addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log("Formulario enviado - Iniciando procesamiento");
     
     const submitBtn = document.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Procesando...';
 
     try {
-        console.log("Recopilando datos del formulario...");
+        // 1. Recopilar datos
         const formData = {
             dni: document.getElementById('dni').value,
             nombre: document.getElementById('nombre').value,
@@ -17,10 +19,14 @@ document.getElementById('formEvaluacion').addEventListener('submit', async (e) =
             deuda_actual: document.getElementById('deuda').value || '0',
             historial_crediticio: document.getElementById('historial').value
         };
-        console.log("Datos a enviar:", formData);
+        console.log("Datos del formulario:", JSON.stringify(formData, null, 2));
 
-        console.log("Enviando solicitud a la API...");
-        const response = await fetch('http://44.203.216.239:5000/evaluar', {
+        // 2. Enviar a la API
+        console.log("Enviando a API...");
+        const apiUrl = 'http://44.203.216.239:5000/evaluar';
+        console.log("URL de la API:", apiUrl);
+        
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -32,20 +38,30 @@ document.getElementById('formEvaluacion').addEventListener('submit', async (e) =
         console.log("Respuesta recibida. Status:", response.status);
         
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error("Error en la respuesta:", errorText);
-            throw new Error(errorText || 'Error en el servidor');
+            const errorData = await response.json().catch(() => null);
+            console.error("Error detallado:", {
+                status: response.status,
+                statusText: response.statusText,
+                errorData: errorData
+            });
+            throw new Error(errorData?.error || `Error HTTP ${response.status}`);
         }
         
         const resultado = await response.json();
         console.log("Resultado exitoso:", resultado);
         
+        // 3. Redireccionar
         const scorePorcentaje = Math.round(resultado.score * 100);
+        console.log("Redirigiendo a resultado.html...");
         window.location.href = `resultado.html?aprobado=${resultado.aprobado}&score=${scorePorcentaje}`;
         
     } catch (error) {
-        console.error("Error completo:", error);
-        alert(`Error: ${error.message}. Por favor revise la consola (F12) para más detalles.`);
+        console.error("Error completo:", {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
+        alert(`Error: ${error.message}\nVer consola para detalles (F12 > Console)`);
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Evaluar Crédito';
